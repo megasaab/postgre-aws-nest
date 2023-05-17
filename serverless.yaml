@@ -1,0 +1,22 @@
+service: aws-postgre-connection
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    POSTGRES_HOST: postgre-sql-instance-cloud-x.c29sgdqffohb.us-east-1.rds.amazonaws.com
+    POSTGRES_PORT: 5432
+    POSTGRES_DATABASE: postgres
+    POSTGRES_USERNAME: postgres
+    POSTGRES_PASSWORD: postgres123
+
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
